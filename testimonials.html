@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- my style -->
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <!-- navbar start-->
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container">
+        <a href="#" class="navbar-brand">
+          <img
+            src="assets/images/logo_dumbways.png"
+            alt="dumbways.id"
+            class="img"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarToggle"
+          aria-controls="navbarToggle"
+          aria-expanded="false"
+          aria-label="Toggle Navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse fs-5" id="navbarToggle">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item mx-3">
+              <a href="index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="addMyProject.html" class="nav-link">Add Project</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link active">Testimonials</a>
+            </li>
+          </ul>
+          <a href="contact.html " class="btn btn-dark">Contact Me</a>
+        </div>
+      </div>
+    </nav>
+    <!-- navbar end-->
+
+    <!-- section testimonial start -->
+    <section class="container-fluid">
+      <div class="container">
+        <h1 class="text-center py-5 fw-bold">My Testimonials</h1>
+        <h4 class="text-center mb-4">Rating By Star</h4>
+        <div class="row d-flex justify-content-center mb-5">
+          <div class="col-sm-1">
+            <button class="btn btn-dark" onclick="getData()">All</button>
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-dark" onclick="getRating(1)">
+              1 <i class="fa-solid fa-star"></i>
+            </button>
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-dark" onclick="getRating(2)">
+              2 <i class="fa-solid fa-star"></i>
+            </button>
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-dark" onclick="getRating(3)">
+              3 <i class="fa-solid fa-star"></i>
+            </button>
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-dark" onclick="getRating(4)">
+              4 <i class="fa-solid fa-star"></i>
+            </button>
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-dark" onclick="getRating(5)">
+              5 <i class="fa-solid fa-star"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="row d-flex justify-content-center mb-5 testimonial"></div>
+      </div>
+    </section>
+    <!-- section testimonial end -->
+
+    <!-- script bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- my script -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
