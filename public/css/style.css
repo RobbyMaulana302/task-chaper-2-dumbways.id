@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+:root {
+  --bg: #e1e7ed;
+}
+
+/* body for poppins */
+* {
+  font-family: "Poppins", sans-serif;
+  text-decoration: none !important;
+}
+
+.color-primary {
+  background-color: var(--bg) !important;
+}
+
+/* navbar */
+
+nav .img {
+  width: 4rem;
+}
+
+/* index  */
+.card p {
+  text-align: justify;
+}
+
+.card-body img {
+  width: 3rem;
+}
+
+/* add my project */
+
+.addmyproject-form {
+  font-weight: 600;
+}
+
+textarea {
+  height: 10rem;
+  resize: none;
+}
+
+/* detail project */
+
+.detail-project-img img {
+  width: 2.5rem;
+}
+
+.detail-project p {
+  text-align: justify;
+}
+
+/* testimonial */
+
+.testimonial img {
+  min-height: 17rem;
+  max-height: 17rem;
+  object-fit: cover;
+}
