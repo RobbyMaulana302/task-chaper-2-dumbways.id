@@ -143,60 +143,10 @@
           <div class="col my-5"><h1 class="fw-bold">My Project</h1></div>
         </div>
         <div class="row" id="my-project">
-          <div class="col-md-4 mb-5">
-            <div class="card p-2">
-              <a href="detail-project/1">
-                <img
-                  src="public/assets/images/logo_dumbways.png"
-                  alt=""
-                  class="img-thumbnail"
-                />
-              </a>
-              <div class="card-body">
-                <h5 class="card-title fw-bold">Lorem ipsum dolor sit amet.</h5>
-                <p class="text-muted card-text">Duration : 3 bulan</p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Laboriosam porro sed, repudiandae hic doloribus odio aperiam
-                  iusto voluptatibus ea, architecto vel praesentium voluptate
-                  explicabo eos? Pariatur velit illum sint animi?
-                </p>
-                <img
-                  src="public/assets/images/nodejs.png"
-                  alt=""
-                  class="rounded-circle img-thumbnail"
-                />
-                <img
-                  src="public/assets/images/nodejs.png"
-                  alt=""
-                  class="rounded-circle img-thumbnail"
-                />
-                <img
-                  src="public/assets/images/nodejs.png"
-                  alt=""
-                  class="rounded-circle img-thumbnail"
-                />
-                <img
-                  src="public/assets/images/nodejs.png"
-                  alt=""
-                  class="rounded-circle img-thumbnail"
-                />
-              </div>
-              <div class="row">
-                <div class="col">
-                  <a href="#" class="btn btn-dark w-100">edit</a>
-                </div>
-                <div class="col">
-                  <a href="#" class="btn btn-dark w-100">delete</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {{ range $index, $data := .Blogs }}
           <div class="col-md-4 mb-5">
             <div class="card p-2">
-              <a href="detail-project/1">
+              <a href="detail-project/{{ $data.ID }}">
                 <img
                   src="public/assets/images/logo_dumbways.png"
                   alt=""
@@ -205,35 +155,44 @@
               </a>
               <div class="card-body">
                 <h5 class="card-title fw-bold">{{ $data.ProjectName }}</h5>
-                <p class="text-muted card-text">Duration : 3 bulan</p>
-                <p>{{$data.Description}}</p>
+                <p class="text-muted card-text">
+                  Duration : {{ $data.Duration }}
+                </p>
+                <div
+                  style="
+                    max-height: 1.8rem;
+                    min-height: 1.8rem;
+                    overflow: hidden;
+                  "
+                >
+                  <p style="text-align: left">
+                    {{$data.Description}} asdasdmasmdsa
+                  </p>
+                </div>
+                {{ range $index, $technology := $data.Technology }}
                 <img
-                  src="public/assets/images/nodejs.png"
-                  alt=""
+                  src="public/assets/images/{{ $technology }}.png"
+                  alt="{{ $technology }}"
                   class="rounded-circle img-thumbnail"
                 />
-                <img
-                  src="public/assets/images/nodejs.png"
-                  alt=""
-                  class="rounded-circle img-thumbnail"
-                />
-                <img
-                  src="public/assets/images/nodejs.png"
-                  alt=""
-                  class="rounded-circle img-thumbnail"
-                />
-                <img
-                  src="public/assets/images/nodejs.png"
-                  alt=""
-                  class="rounded-circle img-thumbnail"
-                />
+                {{ end }}
               </div>
               <div class="row">
                 <div class="col">
-                  <a href="#" class="btn btn-dark w-100">edit</a>
+                  <a
+                    href="edit-project/{{ $data.ID }}"
+                    class="btn btn-dark w-100 rounded-pill"
+                    >Edit Project</a
+                  >
                 </div>
                 <div class="col">
-                  <a href="#" class="btn btn-dark w-100">delete</a>
+                  <form action="/delete-project/{{ $data.ID }}" method="post">
+                    <input
+                      type="submit"
+                      value="Delete Project"
+                      class="btn btn-dark rounded-pill px-4"
+                    />
+                  </form>
                 </div>
               </div>
             </div>

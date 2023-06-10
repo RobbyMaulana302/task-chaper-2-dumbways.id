@@ -10,7 +10,7 @@ func main() {
 
 	// import koneksi database
 	config.DatabaseConnect()
-
+	
 	// package echo
 	e := echo.New()
 
@@ -23,10 +23,12 @@ func main() {
 	e.GET("/add-project", controllers.FormProject)
 	e.GET("/testimonials", controllers.Testimonials)
 	e.GET("/contact", controllers.Contact)
-	e.GET("/detail-project:id", controllers.DetailProject)
+	e.GET("/detail-project/:id", controllers.DetailProject)
+	e.GET("/edit-project/:id", controllers.EditProject)
 	
 	// post
 	e.POST("/add-project", controllers.AddProject)
+	e.POST("/delete-project/:id", controllers.DeleteProject)
 
 	// port
 	e.Logger.Fatal(e.Start(":5000"))

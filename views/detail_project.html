@@ -66,7 +66,9 @@
     <!-- section detail blog start -->
     <section class="container-fluid color-primary">
       <div class="container p-3">
-        <h1 class="text-center my-5 fw-bold fs-1">{{ .Title }}</h1>
+        <h1 class="text-center my-5 fw-bold fs-1">
+          {{ .Projects.ProjectName }}
+        </h1>
         <div class="row mb-4 p-2">
           <div class="col-md-7">
             <div class="card">
@@ -84,11 +86,13 @@
                   <div class="col">
                     <h5>Duration</h5>
                     <i class="fa-solid fa-calendar-days fs-2 me-2"></i>
-                    <span class="align-items-center">{{ .Date }}</span>
+                    <span class="align-items-center"
+                      >{{ .Projects.Date1 }} - {{ .Projects.Date2 }}</span
+                    >
                     <div class="row mt-2">
                       <div class="col d-flex align-items-center">
                         <i class="fa-solid fa-clock fs-3"></i>
-                        <span class="ms-3">{{ .Duration }}</span>
+                        <span class="ms-3">{{ .Projects.Duration }}</span>
                       </div>
                     </div>
                   </div>
@@ -99,40 +103,16 @@
               <div class="col">
                 <h5 class="mb-3">Technologies</h5>
                 <div class="row mb-3">
+                  {{ range $index, $technology := .Projects.Technology }}
                   <div class="col-md-5 detail-project-img">
                     <img
-                      src="/public/assets/images/nodejs.png"
+                      src="/public/assets/images/{{ $technology }}.png"
                       alt=""
                       class="img-thumbnail rounded-circle"
                     />
-                    <span class="ms-2">Nodje Js</span>
+                    <span class="ms-2">{{ $technology }}</span>
                   </div>
-                  <div class="col-md-5 detail-project-img">
-                    <img
-                      src="/public/assets/images/nodejs.png"
-                      alt=""
-                      class="img-thumbnail rounded-circle"
-                    />
-                    <span class="ms-2">Nodje Js</span>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-5 detail-project-img">
-                    <img
-                      src="/public/assets/images/nodejs.png"
-                      alt=""
-                      class="img-thumbnail rounded-circle"
-                    />
-                    <span class="ms-2">Nodje Js</span>
-                  </div>
-                  <div class="col-md-5 detail-project-img">
-                    <img
-                      src="/public/assets/images/nodejs.png"
-                      alt=""
-                      class="img-thumbnail rounded-circle"
-                    />
-                    <span class="ms-2">Nodje Js</span>
-                  </div>
+                  {{ end }}
                 </div>
               </div>
             </div>
@@ -140,9 +120,51 @@
         </div>
         <div class="row">
           <div class="col-md detail-project">
-            <p>{{ .Description }}</p>
-            <p>{{ .Description }}</p>
-            <p>{{ .Description }}</p>
+            <p>
+              {{ .Projects.Description }} Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Cumque distinctio quibusdam magni repudiandae
+              autem illo ipsum, provident non veritatis quasi aperiam corporis
+              deserunt est fugiat rem ullam consequatur ex placeat pariatur.
+              Voluptas dicta veritatis in dolor illo ea velit magni ipsum enim,
+              sed ullam magnam id expedita iure eos, quos odio! Repellat ad
+              laboriosam at molestias, perspiciatis officiis nulla. Blanditiis
+              laborum quas, libero pariatur fugiat doloremque cum vitae numquam
+              sapiente suscipit incidunt adipisci eligendi aut deserunt nihil
+              aspernatur repellendus aperiam perspiciatis assumenda vero totam
+              vel magnam veritatis. Eum et, qui tempore exercitationem
+              doloremque fugit dicta similique voluptatibus, enim quidem
+              obcaecati?
+            </p>
+            <p>
+              {{ .Projects.Description }} Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Cumque distinctio quibusdam magni repudiandae
+              autem illo ipsum, provident non veritatis quasi aperiam corporis
+              deserunt est fugiat rem ullam consequatur ex placeat pariatur.
+              Voluptas dicta veritatis in dolor illo ea velit magni ipsum enim,
+              sed ullam magnam id expedita iure eos, quos odio! Repellat ad
+              laboriosam at molestias, perspiciatis officiis nulla. Blanditiis
+              laborum quas, libero pariatur fugiat doloremque cum vitae numquam
+              sapiente suscipit incidunt adipisci eligendi aut deserunt nihil
+              aspernatur repellendus aperiam perspiciatis assumenda vero totam
+              vel magnam veritatis. Eum et, qui tempore exercitationem
+              doloremque fugit dicta similique voluptatibus, enim quidem
+              obcaecati?
+            </p>
+            <p>
+              {{ .Projects.Description }} Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Cumque distinctio quibusdam magni repudiandae
+              autem illo ipsum, provident non veritatis quasi aperiam corporis
+              deserunt est fugiat rem ullam consequatur ex placeat pariatur.
+              Voluptas dicta veritatis in dolor illo ea velit magni ipsum enim,
+              sed ullam magnam id expedita iure eos, quos odio! Repellat ad
+              laboriosam at molestias, perspiciatis officiis nulla. Blanditiis
+              laborum quas, libero pariatur fugiat doloremque cum vitae numquam
+              sapiente suscipit incidunt adipisci eligendi aut deserunt nihil
+              aspernatur repellendus aperiam perspiciatis assumenda vero totam
+              vel magnam veritatis. Eum et, qui tempore exercitationem
+              doloremque fugit dicta similique voluptatibus, enim quidem
+              obcaecati?
+            </p>
           </div>
         </div>
       </div>

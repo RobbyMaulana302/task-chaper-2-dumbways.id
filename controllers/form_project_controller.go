@@ -8,7 +8,7 @@ import (
 )
 
 func FormProject(c echo.Context) error {
-	var template, error = template.ParseFiles("views/addMyProject.html")
+	var template, error = template.ParseFiles("views/add_project.html")
 
 	if error != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": error.Error()})

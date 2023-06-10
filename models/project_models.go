@@ -7,6 +7,7 @@ type Project struct {
 	ProjectName string
 	StartDate   time.Time
 	EndDate     time.Time
+	Duration 	string
 	Description string
 	Technology  []string
 	Image       string
