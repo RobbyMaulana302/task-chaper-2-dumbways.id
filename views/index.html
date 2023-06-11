@@ -120,8 +120,14 @@
               </div>
             </div>
             <div class="col-md-6 px-5 d-flex align-items-center">
-              <div class="card shadow rounded">
-                <img src="public/assets/images/logo_dumbways.png" alt="sr" />
+              <div class="card shadow rounded container-fluid p-2">
+                <img
+                  src="public/assets/images/foto.jpg"
+                  alt="sr"
+                  style="max-height: 20rem; object-fit: cover"
+                  class="rounded"
+                />
+
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item text-center">
                     <h6 class="fw-bold fs-5">Robby Maulana</h6>
@@ -176,7 +182,14 @@
                     overflow: hidden;
                   "
                 >
-                  <p style="text-align: left">
+                  <p
+                    style="
+                      text-align: left;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                    "
+                  >
                     {{$data.Description}} asdasdmasmdsa
                   </p>
                 </div>
