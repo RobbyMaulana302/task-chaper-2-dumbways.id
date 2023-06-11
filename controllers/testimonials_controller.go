@@ -8,6 +8,8 @@ import (
 )
 
 func Testimonials(c echo.Context) error {
+
+	// parsing file html untuk ditampilkan
 	var template, error = template.ParseFiles("views/testimonials.html")
 
 	if error != nil {

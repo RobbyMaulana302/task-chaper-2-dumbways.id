@@ -8,6 +8,7 @@ import (
 )
 
 func FormProject(c echo.Context) error {
+	// mendapatkan halaman yang akan ditampilkan
 	var template, error = template.ParseFiles("views/add_project.html")
 
 	if error != nil {

@@ -8,6 +8,8 @@ import (
 )
 
 func Contact(c echo.Context) error {
+
+	// parsing file html untuk ditampilkan
 	var template, error = template.ParseFiles("views/contact.html")
 
 	if error != nil {

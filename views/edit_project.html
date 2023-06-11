@@ -70,11 +70,18 @@
           <div class="col-md-7 my-5">
             <!-- form start -->
             <form
-              action="/add-project"
+              action="/update-project"
               method="POST"
               class="fs-5 addmyproject-form"
             >
               <h1 class="text-center fw-bold mb-4">EDIT MY PROJECT</h1>
+              <input
+                type="text"
+                name="id"
+                id="id"
+                value="{{ .Data.ID }}"
+                hidden
+              />
               <div class="mb-4">
                 <label for="input-project-name" class="form-label"
                   >Project Name</label

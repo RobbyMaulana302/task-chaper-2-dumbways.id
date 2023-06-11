@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math"
 	"net/http"
-	"os"
 	"strconv"
 	"taskgolang/config"
 	"taskgolang/models"
@@ -16,50 +15,64 @@ import (
 )
 
 func Home(c echo.Context) error {
-	// sql untuk mendapatkan value dari tabel tb_project
-	data, x := config.Conn.Query(context.Background(), "SELECT * FROM tb_project")
-	if x != nil {
-		fmt.Fprintf(os.Stderr, "Query failed: %v\n", x)
+	// query untuk menampilkan seluruh data pada table
+	data, errQuery := config.Conn.Query(context.Background(), "SELECT * FROM tb_project")
+	// kondisi jika query error
+	if errQuery != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errQuery.Error()})
 	}
 
+	// deklasrasia array dari model struct project
 	var result []models.Project
+
+	// looping data 
 	for data.Next() {
 		var each = models.Project{}
 
+		// scan, membaca setiap baris dari value database
 		err := data.Scan(&each.ID, &each.ProjectName, &each.StartDate, &each.EndDate, &each.Description, &each.Technology, &each.Image)
 
+		// kondisi jika terjadi pada err baris data
 		if err != nil {
 			fmt.Println(err.Error())
 			return c.JSON(http.StatusInternalServerError, map[string]string{"Message": err.Error()})
 		}
+
+		// mengubah format date
 		each.Date1 = each.StartDate.Format("2006-01-02")
 		each.Date2 = each.EndDate.Format("2006-01-02")
 		
+		// parsing date
 		parsingDate1, errParsingDate1 := time.Parse("2006-01-02", each.Date1)
 		
 		if errParsingDate1 != nil {
 			return c.JSON(http.StatusInternalServerError, map[string]string{"message": errParsingDate1.Error()})
 		}
 
+		// parsing date
 		parsingDate2, errParsingDate2 := time.Parse("2006-01-02", each.Date2)
 
 		if errParsingDate2 != nil {
 			return c.JSON(http.StatusInternalServerError, map[string]string{"message": errParsingDate2.Error()})
 		}
 
+		// menghitung jarak tanggal
 		distance := parsingDate2.Sub(parsingDate1).Milliseconds()
 
+		// menghitung agar menjadi bilangan bulat ke bawah dari jarak dan mendapatkan nilai hari, minggu, bulan dan tahun
 		days := math.Floor(float64(distance) / (1000 * 3600 * 24) )
 		fmt.Println(days)
 		weeks := math.Floor(float64(distance) / (1000 * 3600 * 24 * 7) )
 		months := math.Floor(float64(distance) / (1000 * 3600 * 24 * 30) )
 		years := math.Floor(float64(distance) / (1000 * 3600 * 24 * 365) )
 
+		// parsing float64 menjadi int
 		daysParsingInt := int(days)
 		weeksParsingInt := int(weeks)
 		monthsParsingInt := int(months)
 		yearsParsingInt := int(years)
 
+		// pengkondisian durasi
 		if days < 7 {
 			each.Duration = strconv.Itoa(daysParsingInt) + " days"
 		} else if days < 30 {
@@ -74,10 +87,12 @@ func Home(c echo.Context) error {
 	}
 
 
+	// membuat deklarasi dan menampung value dari result ke dalam map interface
 	blogs := map[string]interface{}{
 		"Blogs": result,
 	}
 	
+	// mendapatkan halaman yang akan ditampilkan
 	var template, err = template.ParseFiles("views/index.html")
 
 	if err != nil {

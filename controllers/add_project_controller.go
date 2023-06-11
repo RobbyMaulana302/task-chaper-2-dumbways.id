@@ -1,36 +1,34 @@
 package controllers
 
 import (
-	"fmt"
+	"context"
 	"net/http"
+	"taskgolang/config"
 	"time"
 
 	"github.com/labstack/echo/v4"
 )
 
 func AddProject(c echo.Context) error {
-	// ProjectName := c.FormValue("input-project-name")
+
+	// mengambil nilai dari inputan form
+	ProjectName := c.FormValue("input-project-name")
 	StartDate := c.FormValue("input-start-date")
 	EndDate := c.FormValue("input-end-date")
-	// Description := c.FormValue("input-description")
-	// c.Request().ParseForm()
-	// var Technology = c.Request().Form["checkbox-technology"]
-	// for _, v := range Technology {
-	// 	fmt.Println("v:", v)
-	// }
+	Description := c.FormValue("input-description")
+	Technology := c.Request().Form["checkbox-technology"]
+
+	// parsing format tanggal
 	layout := "2006-01-02"
 	parse1, _ := time.Parse(layout, StartDate)
 	parse2, _ := time.Parse(layout, EndDate)
 
-	// println("Title :", ProjectName)
-	fmt.Println("StartDate :", parse1.Nanosecond())
-	println("EndDate :", parse2.Nanosecond())
-	// println("Description :", Description)
-	// println("Technology :", Technology)
+	// query tambah data ke database
+	_, errQuery := config.Conn.Exec(context.Background(), "INSERT INTO tb_project (name, start_date, end_date, description, technologies, image) VALUES ($1, $2, $3, $4, $5, $6)", ProjectName, parse1, parse2, Description, Technology, "image-1.png" )
 
-	// var newProject = Project{
-	// 	ProjectName: ProjectName,
-	// }
+	if errQuery != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errQuery.Error()})
+	}
 
 	return c.Redirect(http.StatusMovedPermanently, "/")
 }
