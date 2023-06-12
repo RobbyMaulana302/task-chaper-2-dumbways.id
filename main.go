@@ -28,8 +28,8 @@ func main() {
 	
 	// post
 	e.POST("/add-project", controllers.AddProject)
-	e.POST("/delete-project/:id", controllers.DeleteProject)
 	e.POST("/update-project", controllers.UpdateProject)
+	e.POST("/delete-project/:id", controllers.DeleteProject)
 
 	// port
 	e.Logger.Fatal(e.Start(":5000"))
