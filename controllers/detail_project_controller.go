@@ -32,14 +32,14 @@ func DetailProject(c echo.Context) error {
 	result.Date2 = result.EndDate.Format("02 Jan 2006")
 
 	// parsing tanggal start date
-	parsingDate1, errParsingDate1 := time.Parse("2006-01-02", result.Date1)
+	parsingDate1, errParsingDate1 := time.Parse("2006-01-02", result.StartDate.Format("2006-01-02"))
 		
 	if errParsingDate1 != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errParsingDate1.Error()})
 	}
 
 	// parsing tanggal end date
-	parsingDate2, errParsingDate2 := time.Parse("2006-01-02", result.Date1)
+	parsingDate2, errParsingDate2 := time.Parse("2006-01-02", result.EndDate.Format("2006-01-02"))
 
 	if errParsingDate2 != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errParsingDate2.Error()})
