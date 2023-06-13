@@ -217,11 +217,20 @@
                 </div>
                 <div class="col">
                   <form action="/delete-project/{{ $data.ID }}" method="post">
-                    <input
+                    <button
+                      type="submit"
+                      class="btn btn-dark rounded-pill"
+                      id="delete"
+                      onclick="alertDelete()"
+                    >
+                      Delete Project
+                    </button>
+                    <!-- <input
                       type="submit"
                       value="Delete Project"
                       class="btn btn-dark rounded-pill px-4"
-                    />
+                      id="delete"
+                    /> -->
                   </form>
                 </div>
               </div>
@@ -240,6 +249,6 @@
     ></script>
 
     <!-- my script -->
-    <script src="public/js/script.js"></script>
+    <script src="/public/js/script.js"></script>
   </body>
 </html>

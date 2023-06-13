@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-// membuat model dari project
+// membuat struct interface manipulation model dari project
 type Project struct {
 	ID          int
 	ProjectName string

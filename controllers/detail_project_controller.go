@@ -5,7 +5,7 @@ import (
 	"math"
 	"net/http"
 	"strconv"
-	"taskgolang/config"
+	"taskgolang/connection"
 	"taskgolang/models"
 	"text/template"
 	"time"
@@ -21,7 +21,7 @@ func DetailProject(c echo.Context) error {
 	var result = models.Project{}
 
 	// query menampilkan 1 data dari database
-	errQuery := config.Conn.QueryRow(context.Background(), "SELECT name, start_date, end_date, description, technologies FROM tb_project WHERE id=$1", id).Scan(&result.ProjectName, &result.StartDate, &result.EndDate, &result.Description, &result.Technology)
+	errQuery := connection.Conn.QueryRow(context.Background(), "SELECT name, start_date, end_date, description, technologies FROM tb_project WHERE id=$1", id).Scan(&result.ProjectName, &result.StartDate, &result.EndDate, &result.Description, &result.Technology)
 
 	if errQuery != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errQuery.Error()})

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"taskgolang/config"
+	"taskgolang/connection"
 	"taskgolang/controllers"
 
 	"github.com/labstack/echo/v4"
@@ -9,7 +9,7 @@ import (
 func main() {
 
 	// import koneksi database
-	config.DatabaseConnect()
+	connection.DatabaseConnect()
 	
 	// package echo
 	e := echo.New()

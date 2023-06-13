@@ -6,7 +6,7 @@ import (
 	"math"
 	"net/http"
 	"strconv"
-	"taskgolang/config"
+	"taskgolang/connection"
 	"taskgolang/models"
 	"text/template"
 	"time"
@@ -16,7 +16,7 @@ import (
 
 func Home(c echo.Context) error {
 	// query untuk menampilkan seluruh data pada table
-	data, errQuery := config.Conn.Query(context.Background(), "SELECT * FROM tb_project")
+	data, errQuery := connection.Conn.Query(context.Background(), "SELECT * FROM tb_project")
 	// kondisi jika query error
 	if errQuery != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errQuery.Error()})

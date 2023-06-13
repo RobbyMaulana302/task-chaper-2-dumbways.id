@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 	"strconv"
-	"taskgolang/config"
+	"taskgolang/connection"
 	"taskgolang/models"
 	"text/template"
 
@@ -22,7 +22,7 @@ func EditProject(c echo.Context) error {
 	var result = models.Project{}
 
 	// Query mengambil 1 data dari database
-	errQuery := config.Conn.QueryRow(context.Background(), "SELECT * FROM tb_project WHERE id=$1", id).Scan(&result.ID, &result.ProjectName, &result.StartDate, &result.EndDate, &result.Description, &result.Technology, &result.Image)
+	errQuery := connection.Conn.QueryRow(context.Background(), "SELECT * FROM tb_project WHERE id=$1", id).Scan(&result.ID, &result.ProjectName, &result.StartDate, &result.EndDate, &result.Description, &result.Technology, &result.Image)
 
 	if errQuery != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errParse.Error()})
