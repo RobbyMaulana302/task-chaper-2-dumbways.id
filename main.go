@@ -3,6 +3,7 @@ package main
 import (
 	"taskgolang/connection"
 	"taskgolang/controllers"
+	"taskgolang/middleware"
 
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"
@@ -18,6 +19,7 @@ func main() {
 
 	// file static direktori public
 	e.Static("/public", "public")
+	e.Static("/uploads", "uploads")
 
 	// untuk menggunakan session echo
 	e.Use(session.Middleware(sessions.NewCookieStore([]byte("session"))))
@@ -43,8 +45,8 @@ func main() {
 	e.POST("/register", controllers.Register)
 	
 	// post
-	e.POST("/add-project", controllers.AddProject)
-	e.POST("/update-project", controllers.UpdateProject)
+	e.POST("/add-project", middleware.UploadFile(controllers.AddProject))
+	e.POST("/update-project", middleware.UploadFile(controllers.UpdateProject))
 	e.POST("/delete-project/:id", controllers.DeleteProject)
 
 	// port

@@ -1,33 +1,40 @@
 package middleware
 
-// func UploadFile(next echo.HandlerFunc) echo.HandlerFunc {
-// 	return func(c echo.Context) error {
-// 		file, err := c.FormFile("input-image")
-// 		if err != nil {
-// 			return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
-// 		}
+import (
+	"io"
+	"io/ioutil"
+	"net/http"
 
-// 		src, err := file.Open()
-// 		if err != nil {
-// 			return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
-// 		}
-// 		defer src.Close()
+	"github.com/labstack/echo/v4"
+)
 
-// 		tempFile, err := ioutil.TempFile("uploads", "image-*.png")
-// 		if err != nil {
-// 			return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
-// 		}
-// 		defer tempFile.Close()
+func UploadFile(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		file, err := c.FormFile("input-image")
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err)
+		}
 
-// 		if _, err := io.Copy(tempFile, src); err != nil {
-// 			return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
-// 		}
+		src, err := file.Open()
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err)
+		}
+		defer src.Close()
 
-// 		data := tempFile.Name()
-// 		filename := data[8:]
+		tempFile, err := ioutil.TempFile("uploads", "image-*.png")
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err)
+		}
+		defer tempFile.Close()
 
-// 		c.Set("dataFile", filename)
+		if _, err = io.Copy(tempFile, src); err != nil {
+			return c.JSON(http.StatusBadRequest, err)
+		}
 
-// 		return next(c)
-// 	}
-// }
+		data := tempFile.Name()
+		filename := data[8:] // uploads/
+
+		c.Set("dataFile", filename)
+		return next(c)
+	}
+}

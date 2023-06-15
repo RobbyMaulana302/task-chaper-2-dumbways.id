@@ -10,6 +10,7 @@ import (
 )
 
 func AddProject(c echo.Context) error {
+
 	// mengambil nilai dari inputan form	
 	ProjectName := c.FormValue("input-project-name")
 	StartDate := c.FormValue("input-start-date")
@@ -17,7 +18,7 @@ func AddProject(c echo.Context) error {
 	Description := c.FormValue("input-description")
 	Technology := c.Request().Form["checkbox-technology"]
 	author_id := c.FormValue("author")
-	image := "image.png"
+	image := c.Get("dataFile").(string)
 
 	// parsing format tanggal
 	layout := "2006-01-02"

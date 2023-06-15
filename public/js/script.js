@@ -226,9 +226,7 @@ async function getRating(rating) {
   document.querySelector(".testimonial").innerHTML = testimonialHTML;
 }
 
-function alertDelete() {
-  let ok = document.querySelector("#delet");
-  ok.addEventListener("click", () => {
-    return confirm("bro keluar kek");
-  });
-}
+let ok = document.querySelector("#delete");
+ok.addEventListener("click", () => {
+  return confirm("bro keluar kek");
+});

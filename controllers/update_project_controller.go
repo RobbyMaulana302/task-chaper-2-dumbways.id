@@ -22,10 +22,11 @@ func UpdateProject(c echo.Context) error {
 	layout := "2006-01-02"
 	parse1, _ := time.Parse(layout, StartDate)
 	parse2, _ := time.Parse(layout, EndDate)
+	image := c.Get("dataFile").(string)
 
 
 	// Query update data ke database
-	_, errQuery := connection.Conn.Exec(context.Background(), "UPDATE tb_project SET name = $1, start_date = $2, end_date = $3, description = $4, technologies = $5, image = $6, author_id = $7 WHERE id = $8", ProjectName, parse1, parse2, Description, Technology, "image-update-ke-1.png", author_id, id)
+	_, errQuery := connection.Conn.Exec(context.Background(), "UPDATE tb_project SET name = $1, start_date = $2, end_date = $3, description = $4, technologies = $5, image = $6, author_id = $7 WHERE id = $8", ProjectName, parse1, parse2, Description, Technology, image, author_id, id)
 
 	if errQuery != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errQuery.Error()})
