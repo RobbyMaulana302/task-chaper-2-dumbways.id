@@ -50,14 +50,39 @@
             <li class="nav-item mx-3">
               <a href="/" class="nav-link">Home</a>
             </li>
+            {{ if .DataSession.IsLogin }}
             <li class="nav-item">
-              <a href="/add-project" class="nav-link">Add Project</a>
+              <a href="add-project" class="nav-link">Add Project</a>
             </li>
             <li class="nav-item">
-              <a href="/testimonials" class="nav-link">Testimonials</a>
+              <a href="testimonials" class="nav-link">Testimonials</a>
             </li>
+            {{ end }}
           </ul>
-          <a href="/contact" class="btn btn-dark">Contact Me</a>
+          <ul class="navbar-nav">
+            {{ if .DataSession.IsLogin }}
+            <a href="#" class="text-dark mx-2"
+              >Hello, {{ .DataSession.Name }}</a
+            >
+            <form id="myform" action="/logout" method="POST"></form>
+            <button
+              onclick="document.getElementById('myform').submit()"
+              class="btn btn-dark mx-4"
+            >
+              Logout
+            </button>
+            {{ else }}
+            <li>
+              <a href="/form-register" class="nav-link">Register</a>
+            </li>
+            <li>
+              <a href="/form-login" class="mx-4 nav-link">Login</a>
+            </li>
+            {{ end }}
+          </ul>
+          {{ if .DataSession.IsLogin }}
+          <a href="contact " class="btn btn-dark">Contact Me</a>
+          {{ end }}
         </div>
       </div>
     </nav>

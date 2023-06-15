@@ -10,6 +10,7 @@ import (
 	"text/template"
 	"time"
 
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 )
 
@@ -71,9 +72,25 @@ func DetailProject(c echo.Context) error {
 		result.Duration = strconv.Itoa(yearsParsingInt) + " years"
 	}
 
+	var userData = models.SessionData{}
+
+	sess, errSession := session.Get("session", c)
+
+	if errSession != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": errSession.Error()})
+	}
+
+	if sess.Values["isLogin"] != true {
+		userData.IsLogin = false
+	} else {
+		userData.IsLogin = true
+		userData.Name = sess.Values["name"].(string)
+	}
+
 	// membuat data baru dari data result
-	data := map[string]interface{}{
+	datas := map[string]interface{}{
 		"Projects": result,
+		"DataSession" : userData,
 	}
 
 	// mendapatkan halaman yang akan ditampilkan
@@ -83,5 +100,5 @@ func DetailProject(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": errTemplate.Error()})
 	}
 
-	return template.Execute(c.Response(), data)
+	return template.Execute(c.Response(), datas)
 }

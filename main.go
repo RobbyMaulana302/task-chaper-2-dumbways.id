@@ -4,6 +4,8 @@ import (
 	"taskgolang/connection"
 	"taskgolang/controllers"
 
+	"github.com/gorilla/sessions"
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 )
 func main() {
@@ -17,6 +19,9 @@ func main() {
 	// file static direktori public
 	e.Static("/public", "public")
 
+	// untuk menggunakan session echo
+	e.Use(session.Middleware(sessions.NewCookieStore([]byte("session"))))
+
 	// routing
 	// get
 	e.GET("/", controllers.Home)
@@ -25,6 +30,17 @@ func main() {
 	e.GET("/contact", controllers.Contact)
 	e.GET("/detail-project/:id", controllers.DetailProject)
 	e.GET("/edit-project/:id", controllers.EditProject)
+
+	// login
+	e.GET("/form-login", controllers.FormLogin)
+	e.POST("/login", controllers.Login)
+
+	// logout
+	e.POST("/logout", controllers.Logout)
+
+	// register
+	e.GET("/form-register", controllers.FormRegister)
+	e.POST("/register", controllers.Register)
 	
 	// post
 	e.POST("/add-project", controllers.AddProject)
@@ -34,19 +50,6 @@ func main() {
 	// port
 	e.Logger.Fatal(e.Start(":5000"))
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

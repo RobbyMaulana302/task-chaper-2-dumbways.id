@@ -14,4 +14,6 @@ type Project struct {
 	Image       string
 	Date1       string
 	Date2       string
+	Author 		string
+	Author_id	int
 }
